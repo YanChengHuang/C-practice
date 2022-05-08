@@ -80,7 +80,7 @@ void main(){
     root = NULL;
     /* Inserting nodes into tree */
     for(int i=0;i<10;i++){
-        printf("%p\n",root);
+        // printf("%p\n",root);
         insert(&root, input[i]);
         
     }
