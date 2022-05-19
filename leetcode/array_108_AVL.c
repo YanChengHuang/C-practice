@@ -120,7 +120,7 @@ void print2D(struct Node *root)
    print2DUtil(root, 0);
 }
 int main(){
-    int a[11] = {5,6,11,7,9,1,1,1,1,1,1};
+    int a[8] = {9,7,4,5,21,65,1,3};
     // int a[2] = {-11,-9};
     TreeNode *root = NULL;
     
