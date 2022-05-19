@@ -9,6 +9,16 @@ struct Node {
     int height;
 };
 typedef struct Node TreeNode;
+TreeNode * createNode(int key);
+int getHeight(struct Node* node);
+int getBalancedFactor(struct Node* node);
+struct Node* rightRotate(struct Node* y);
+struct Node* leftRotate(struct Node* x);
+struct Node* insert(struct Node* node, int val);
+TreeNode* sortedArrayToBST(int* nums, int numsSize);
+void print2DUtil(TreeNode *root, int space);
+void print2D(struct Node *root);
+
 struct Node * createNode(int key){
     struct Node * node = (struct Node *)malloc(sizeof(struct Node));
     node->key = key;
@@ -64,15 +74,16 @@ struct Node* insert(struct Node* node, int val){
     }
     node->height = fmax(getHeight(node->left), getHeight(node->right))+1;
     int bf = getBalancedFactor(node);
-    
-    if(bf>1 && val<node->left->key) return rightRotate(node);
-    if(bf<-1 && val>node->right->key) return leftRotate(node);
-    if(bf>1 && val>node->left->key){
+    if(bf>1 && val<node->left->key) return rightRotate(node);//LL型 right rotate即可
+
+    if(bf<-1 && val>node->right->key) return leftRotate(node);//RR型 left rotate即可
+        
+    if(bf>1 && val>node->left->key){ //LR型 先left再right rotate
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
-    if(bf<-1 && val<node->right->key){
-        node->right = rightRotate(node->right);
+    if(bf<-1 && val<node->right->key){ //RL型 先right再left rotate
+        node->right = rightRotate(node->right);    
         return leftRotate(node);
     }
     return node;
@@ -83,7 +94,10 @@ struct Node* insert(struct Node* node, int val){
 TreeNode* sortedArrayToBST(int* nums, int numsSize){
     struct Node* root = NULL;
     for(int i=0; i<numsSize; i++){
+        
         root = insert(root, nums[i]);
+        printf("------------\n");
+        print2D(root);
         
     }
     return root;
@@ -120,13 +134,13 @@ void print2D(struct Node *root)
    print2DUtil(root, 0);
 }
 int main(){
-    int a[11] = {5,6,11,7,9,1,1,1,1,1,1};
+    int a[8] = {9,7,4,5,21,65,1,3};
     // int a[2] = {-11,-9};
     TreeNode *root = NULL;
     
-    root = sortedArrayToBST(a,7);
+    root = sortedArrayToBST(a,8);
     printf("Display tree \n");
     // printf("point : %p\n", root);
-    print2D(root);
+    
     return 0;
 }
