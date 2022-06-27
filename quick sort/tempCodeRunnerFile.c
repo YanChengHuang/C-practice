@@ -1,0 +1,2 @@
+nt(head);
+    print(mid);
