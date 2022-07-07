@@ -24,6 +24,7 @@ void print(Node* head)
         printf("%d ", temp->val);
         temp = temp->next;
     }
+    printf("\n");
 }
 
 void printArray(int A[], int size)
@@ -34,7 +35,7 @@ void printArray(int A[], int size)
     printf("\n");
 }
 
-Node * middle(head){
+Node * middle(Node * head){
     Node *slow = head;
     Node *fast = head;
     while(fast->next){
@@ -48,9 +49,10 @@ Node * middle(head){
 }
 
 Node *merge(Node * left,Node * right){
-    Node *fake_head = (Node *)malloc(sizeof(Node));
-    Node *temp = fake_head;
-    while(!left && !right){
+    Node *temp = (Node *)malloc(sizeof(Node));
+    Node *fake_head = temp;
+    
+    while(left && right){
         if(left->val<=right->val){
             temp->next = left;
             left=left->next;
@@ -61,33 +63,25 @@ Node *merge(Node * left,Node * right){
         }
         temp = temp->next;
     }
-    while(right){
-        temp->next = right;
-        right=right->next;
-        temp = temp->next;
-    }
-     while(left){
-        left->next = left;
-        left=left->next;
-        temp = temp->next;
-    }
-    temp->next = NULL;
+    if(right)   temp->next = right;
+    if(left)    temp->next = left;
     return fake_head->next;
 }
 
 
 Node *sort(Node * head){
-    if(!head->next){
+    if(!(head->next)){
         return head;
     }
 
-    Node* mid = middle(head);
-    Node* head2 = mid->next;
+    Node* mid = (Node*)malloc(sizeof(Node));
+    Node* head2 = (Node*)malloc(sizeof(Node));
+    mid = middle(head);
+    head2 = mid->next;
     mid->next = NULL;
-    print(head);
-    print(head2);
+    // print(head);
+    // print(head2);
     Node* finalhead = merge(sort(head), sort(head2));
-
     return finalhead;
 }
 

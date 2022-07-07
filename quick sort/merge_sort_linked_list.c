@@ -96,12 +96,13 @@ Node* sort(Node* head)
     if (head->next == NULL) {
         return head;
     }
-    
+    print(head);
     Node* mid = (Node*)malloc(sizeof(Node));
     Node* head2 = (Node*)malloc(sizeof(Node));
     mid = middle(head);
     head2 = mid->next;
     mid->next = NULL;
+    
     //分成兩個head
     // recursive call to sort() hence diving our problem,
     // and then merging the solution
