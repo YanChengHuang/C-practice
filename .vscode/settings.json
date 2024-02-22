@@ -1,6 +1,13 @@
 {
     "files.associations": {
         "*.ejs": "html",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "utility": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "xstring": "cpp",
+        "initializer_list": "cpp",
+        "xiosbase": "cpp",
+        "xutility": "cpp"
     }
 }

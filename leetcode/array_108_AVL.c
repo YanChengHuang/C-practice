@@ -1,6 +1,6 @@
-#include <stdio.h>
+// #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+// #include <math.h>
 #define COUNT 5
 struct Node {
     int key;
